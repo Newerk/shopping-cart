@@ -1,4 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { HomePage } from "../home-page/home-page.jsx";
+import { ShopPage } from "../shop-page/shop-page.jsx";
 
 const Header = () => {
   return (
@@ -19,10 +21,12 @@ const Header = () => {
 };
 
 export const App = () => {
+  const { page } = useParams();
+
   return (
     <>
       <Header />
-      <Outlet />
+      {page === "shop" ? <ShopPage /> : <HomePage />}
     </>
   );
 };

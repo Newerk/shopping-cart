@@ -3,34 +3,6 @@ import { ShopPage } from "./shop-page";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-const makeUnsortedArray = (size) => {
-  let sortedArray = [...Array(size).keys()];
-  let unsortedArray = [];
-
-  for (let i = 0; i < size; i++) {
-    unsortedArray.push(
-      sortedArray.splice(Math.floor(Math.random() * sortedArray.length), 1)
-    );
-  }
-
-  return unsortedArray;
-};
-
-const mockListOfItems = (size) => {
-  let array = [];
-  const mockFeaturedRank = makeUnsortedArray(size);
-
-  for (let i = 0; i < size; i++) {
-    array.push({
-      price: i,
-      featured_rank: parseInt(mockFeaturedRank[i].toString()),
-    });
-  }
-
-  return array;
-};
-
-// console.log(mockListOfItems(10));
 
 describe("Shop Page Component", () => {
   it("Renders Shop Page", () => {
@@ -58,20 +30,6 @@ describe("Shop Page Component", () => {
       expect(getByText(/low to high/i)).toBeInTheDocument();
     });
   });
-
-  /*   
-  it("Items are sorted based on 'featured' items", () => {
-    //just check that the products are NOT sorted from high to low, or low to high.
-    //this will act as our initial state.
-  });
-
-  it("Items are sorted from high to low prices", () => {
-    render(<ShopPage />);
-  });
-
-  it("Items are sorted from low to high prices", () => {
-    render(<ShopPage />);
-  }); */
 
   it("View button opens a dropdown to select how many items to show on page", async () => {
     const user = userEvent.setup();

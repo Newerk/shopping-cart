@@ -1,15 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { ShopPage } from "./shop-page";
 import { render, screen } from "@testing-library/react";
-
-const maxNumOfViewedItems = vi
-  .fn()
-  .mockImplementation((maxItems, container) => {
-    for (let i = 0; i < maxItems; i++) {
-      container.appendChild(<div>child</div>);
-    }
-    return container.childNodes.length;
-  });
+import userEvent from "@testing-library/user-event";
 
 const makeUnsortedArray = (size) => {
   let sortedArray = [...Array(size).keys()];
@@ -38,7 +30,7 @@ const mockListOfItems = (size) => {
   return array;
 };
 
-console.log(mockListOfItems(10));
+// console.log(mockListOfItems(10));
 
 describe("Shop Page Component", () => {
   it("Renders Shop Page", () => {
@@ -56,31 +48,40 @@ describe("Shop Page Component", () => {
     expect(wrapper.childNodes.length).toEqual(3);
   });
 
-  it("Sort btn opens a dropdown", () => {
-    render(<ShopPage />);
+  it("Sort btn opens a dropdown when clicked", async () => {
+    const user = userEvent.setup();
+    const { getByText } = render(<ShopPage />);
 
-    //mock a callback function
-    const openDropdown = vi.fn();
-
-    expect(true).toBeFalsy(); //placeholder
+    await user.click(getByText(/sort/i)).then(() => {
+      expect(getByText(/featured/i)).toBeInTheDocument();
+      expect(getByText(/high to low/i)).toBeInTheDocument();
+      expect(getByText(/low to high/i)).toBeInTheDocument();
+    });
   });
 
+  /*   
   it("Items are sorted based on 'featured' items", () => {
     //just check that the products are NOT sorted from high to low, or low to high.
     //this will act as our initial state.
   });
 
-  it("Items are sorted from high to low prices", () => {});
-
-  it("Items are sorted from low to high prices", () => {});
-
-  it("View button opens a dropdown", () => {
+  it("Items are sorted from high to low prices", () => {
     render(<ShopPage />);
+  });
 
-    //mock a callback function
-    const openDropdown = vi.fn();
+  it("Items are sorted from low to high prices", () => {
+    render(<ShopPage />);
+  }); */
 
-    expect(true).toBeFalsy(); //placeholder
+  it("View button opens a dropdown to select how many items to show on page", async () => {
+    const user = userEvent.setup();
+    const { getByText } = render(<ShopPage />);
+
+    await user.click(getByText(/sort/i)).then(() => {
+      expect(getByText(/25/i)).toBeInTheDocument(); //number subject to change, depends on how many items my store will have
+      expect(getByText(/50/i)).toBeInTheDocument(); //number subject to change, depends on how many items my store will have
+      expect(getByText(/100/i)).toBeInTheDocument(); //number subject to change, depends on how many items my store will have
+    });
   });
 
   it("Renders products container", () => {
@@ -88,35 +89,48 @@ describe("Shop Page Component", () => {
     expect(screen.getByText("Products")).toBeInTheDocument(); //value in getByText() subject to change
   });
 
-  it("Products container doesnt show more than 25 items", () => {
-    render(<ShopPage />);
-    const container = screen.getByText("Products");
-    const { mockContainer } = render(<div>Parent</div>);
+  it("Products container doesnt show more than 25 items", async () => {
+    const user = userEvent.setup();
+    const getByTestId = render(<ShopPage />);
 
-    expect(container.childNodes.length).toBeLessThanOrEqual(
-      maxNumOfViewedItems(25, mockContainer)
-    );
+    await user.click(screen.getByText(/^[(]?25[)]?$/)).then(() => {
+      expect(getByTestId("items-container").childNodes.length).toBeGreaterThan(
+        0
+      );
+
+      expect(
+        getByTestId("items-container").childNodes.length
+      ).toBeLessThanOrEqual(25);
+    });
   });
 
-  it("Products container doesnt show more than 50 items", () => {
-    render(<ShopPage />);
+  it("Products container doesnt show more than 50 items", async () => {
+    const user = userEvent.setup();
+    const getByTestId = render(<ShopPage />);
 
-    const container = screen.getByText("Products");
-    const { mockContainer } = render(<div>Parent</div>);
+    await user.click(screen.getByText(/^[(]?50[)]?$/)).then(() => {
+      expect(getByTestId("items-container").childNodes.length).toBeGreaterThan(
+        25
+      );
 
-    expect(container.childNodes.length).toBeLessThanOrEqual(
-      maxNumOfViewedItems(50, mockContainer)
-    );
+      expect(
+        getByTestId("items-container").childNodes.length
+      ).toBeLessThanOrEqual(50);
+    });
   });
 
-  it("Products container doesnt show more than 100 items", () => {
-    render(<ShopPage />);
+  it("Products container doesnt show more than 100 items", async () => {
+    const user = userEvent.setup();
+    const getByTestId = render(<ShopPage />);
 
-    const container = screen.getByText("Products");
-    const { mockContainer } = render(<div>Parent</div>);
+    await user.click(screen.getByText(/^[(]?100[)]?$/)).then(() => {
+      expect(getByTestId("items-container").childNodes.length).toBeGreaterThan(
+        50
+      );
 
-    expect(container.childNodes.length).toBeLessThanOrEqual(
-      maxNumOfViewedItems(100, mockContainer)
-    );
+      expect(
+        getByTestId("items-container").childNodes.length
+      ).toBeLessThanOrEqual(100);
+    });
   });
 });

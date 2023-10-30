@@ -31,12 +31,14 @@ const mockListOfItems = (size) => {
   for (let i = 0; i < size; i++) {
     array.push({
       price: i,
-      featured_rank: mockFeaturedRank[i],
+      featured_rank: parseInt(mockFeaturedRank[i].toString()),
     });
   }
 
   return array;
 };
+
+console.log(mockListOfItems(10));
 
 describe("Shop Page Component", () => {
   it("Renders Shop Page", () => {

@@ -5,6 +5,9 @@ import { describe, it, expect } from "vitest";
 describe("Shopping Cart Component", () => {
   it("Cart Component Renders", () => {
     expect(render(<ShoppingCart />)).toBeInTheDocument();
+    expect(render(screen.getByText(/total price/i))).toBeInTheDocument();
+    expect(render(screen.getByText(/summary/i))).toBeInTheDocument();
+    expect(render(screen.getByText(/checkout/i))).toBeInTheDocument();
   });
 
   it("Total price component renders", () => {

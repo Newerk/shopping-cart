@@ -2,21 +2,21 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 
-const mockIncrement = vi
-  .fn()
-  .mockImplementation((quantity) => parseInt(quantity) + 1);
+// const mockIncrement = vi
+//   .fn()
+//   .mockImplementation((quantity) => parseInt(quantity) + 1);
 
-const mockDecrement = vi
-  .fn()
-  .mockImplementation((quantity) => parseInt(quantity) - 1);
+// const mockDecrement = vi
+//   .fn()
+//   .mockImplementation((quantity) => parseInt(quantity) - 1);
 
-const mockUpdateQuantity = vi
-  .fn()
-  .mockImplementation((quantity, valueChanger) => {
-    valueChanger === "+"
-      ? (quantity = parseInt(quantity) + 1)
-      : (quantity = parseInt(quantity) - 1);
-  });
+// const mockUpdateQuantity = vi
+//   .fn()
+//   .mockImplementation((quantity, valueChanger) => {
+//     valueChanger === "+"
+//       ? (quantity = parseInt(quantity) + 1)
+//       : (quantity = parseInt(quantity) - 1);
+//   });
 
 describe("Shopping Cart Component", () => {
   it("Cart Component Renders", () => {
@@ -36,66 +36,44 @@ describe("Shopping Cart Component", () => {
     expect(screen.getAllByTestId("items-wrapper")).not.toBeInTheDocument();
   });
 
-  it("Increasing item quantity increases total price", async () => {
-    const user = userEvent.setup();
-    render(<ShoppingCart />);
-
-    await user.click("insert appropriate btn here").then(
-      () => expect(true).toBeFalsy() //placeholder
-    );
-  });
-
-  it("Decreasing item quantity decreases total price", async () => {
-    const user = userEvent.setup();
-    render(<ShoppingCart />);
-
-    await user.click("insert appropriate btn here").then(
-      () => expect(true).toBeFalsy() //placeholder
-    );
-  });
-
   it("Pressing '+' or '-' button changes quantity of item", async () => {
     const user = userEvent.setup();
     render(<ShoppingCart items={notEmpty} />); //placeholder prop
-
     const itemsWrapper = screen.getByTestId("items-wrapper");
 
-    await user.click("insert appropriate btn here").then(() => {
-      let currentQuantity =
-        itemsWrapper.childNodes[0].querySelector(".quantity").textContent;
-      const plusOne = mockIncrement(currentQuantity);
+    let currentQuantity =
+      itemsWrapper.childNodes[0].querySelector(".quantity").textContent;
 
+    await user.click(screen.queryAllByText("+")[0]).then(() => {
       expect(
         itemsWrapper.childNodes[0].querySelector(".quantity").textContent
-      ).toEqual(plusOne);
+      ).toEqual(currentQuantity + 1);
     });
 
-    await user.click("insert appropriate btn here").then(() => {
-      let currentQuantity =
-        itemsWrapper.childNodes[0].querySelector(".quantity").textContent;
-
-      const minusOne = mockDecrement(currentQuantity);
+    await user.click(screen.queryAllByText("-")[0]).then(() => {
       expect(
         itemsWrapper.childNodes[0].querySelector(".quantity").textContent
-      ).toEqual(minusOne);
+      ).toEqual(currentQuantity - 1);
     });
   });
 
   it("Pressing '-' button to reach quantity 0 remmoves item from cart", async () => {
     const user = userEvent.setup();
-    render(<ShoppingCart />);
+    render(<ShoppingCart items={onlyOneItemInCart} />); //placeholder prop
+    const itemsWrapper = screen.getByTestId("items-wrapper");
 
-    await user.click("insert appropriate btn here").then(
-      () => expect(true).toBeFalsy() //placeholder
-    );
+    await user.click(screen.queryAllByText("-")[0]).then(() => {
+      expect(itemsWrapper).not.toBeInTheDocument();
+    });
   });
 
   it("Trash can button removes item from cart", async () => {
     const user = userEvent.setup();
-    render(<ShoppingCart />);
+    render(<ShoppingCart items={onlyOneItemInCart} />); //placeholder prop
+    const itemsWrapper = screen.getByTestId("items-wrapper");
 
-    await user.click("insert appropriate btn here").then(
-      () => expect(true).toBeFalsy() //placeholder
-    );
+    await user.click(screen.queryAllByTestId("delete-btn")).then(() => {
+      expect(itemsWrapper).not.toBeInTheDocument();
+    });
   });
 });

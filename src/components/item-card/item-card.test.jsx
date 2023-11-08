@@ -5,7 +5,7 @@ describe("Card Component", () => {
   it("render card", () => {
     const component = render(<Card />);
     expect(component).toBeInTheDocument();
-    expect(component.getByText("$")).toBeInTheDocument();
+    expect(component.getByAltText("item_thumbnail")).toBeInTheDocument();
     expect(component.getByTestId("item_name")).toBeInTheDocument();
     expect(component.getByTestId("item_price")).toBeInTheDocument();
     expect(

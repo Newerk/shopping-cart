@@ -45,7 +45,8 @@ export const ShopPage = () => {
           Sort
         </button>
       </header>
-      <section>{/* wrapper for store items */}</section>
+      <section className={styles["items-wrapper"]}> testing
+      </section>
       {dropDown}
     </div>
   );

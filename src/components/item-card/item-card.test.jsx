@@ -1,5 +1,5 @@
-const { render, screen } = require("@testing-library/react");
-const { describe, it, expect } = require("vitest");
+import { render } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 
 describe("Card Component", () => {
   it("render card", () => {

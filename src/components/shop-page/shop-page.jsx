@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "../shop-page/shop-page.module.css";
+import PropTypes from "prop-types";
+import { Card } from "../item-card/item-card";
 
 const SearchBar = () => {
   return (
@@ -11,19 +13,24 @@ const SearchBar = () => {
 };
 
 const SortDropDown = () => {
-  return;
-  // (
-  //filler code
-  // <>
-  //   <div>Featured</div>
-  //   <div>Low to High</div>
-  //   <div>High to Low</div>
-  // </>
-  // );
+  return <div className={styles["dropdown"]}></div>;
+};
+
+SortDropDown.propTypes = {
+  activeSort: PropTypes.string,
+  setActiveSort: PropTypes.func,
+  setDropDown: PropTypes.func,
 };
 
 export const ShopPage = () => {
   const [dropDown, setDropDown] = useState(null);
+  const [activeSort, setActiveSort] = useState("Featured");
+  const [activeView, setActiveView] = useState(25);
+
+  const handleSortSelection = () => {};
+
+  const handleViewSelection = () => {};
+
   return (
     <div className={styles["shop"]}>
       <aside className={styles["filter-container"]}>
@@ -36,18 +43,36 @@ export const ShopPage = () => {
       </aside>
       <header className={styles["shop-header"]}>
         <SearchBar />
-        <button
-          className={styles["sort-btn"]}
-          onClick={() => {
-            setDropDown(<SortDropDown />);
-          }}
-        >
-          Sort
-        </button>
+        <div className={styles["btns-wrapper"]}>
+          <button
+            className={styles["sort-btn"]}
+            onClick={() => {
+              setDropDown(<SortDropDown />);
+            }}
+          >
+            Sort {`(${activeSort})`}
+            {dropDown}
+          </button>
+
+          <button
+            className={styles["view-btn"]}
+            onClick={() => {
+              setDropDown(<ViewDropDown />);
+            }}
+          >
+            View {"(25)"}
+          </button>
+        </div>
       </header>
-      <section className={styles["items-wrapper"]}> testing
+      <section className={styles["items-wrapper"]}>
+        <h2>Products</h2>
+        <div
+          data-testid="items-container"
+          className={styles["items-container"]}
+        >
+          <Card />
+        </div>
       </section>
-      {dropDown}
     </div>
   );
 };

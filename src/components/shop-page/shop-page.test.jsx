@@ -3,29 +3,20 @@ import { ShopPage } from "./shop-page";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-
 describe("Shop Page Component", () => {
-  it("Renders Shop Page", () => {
-    expect(render(<ShopPage />).getByText("ShopPage").textContent).toMatch(
-      /shoppage/i
-    );
-  });
-
-  it("Filters wrapper has 3 children", () => {
+  it("Page shows the 3 filtering options", () => {
     render(<ShopPage />);
 
-    const filterComponent = screen.getByText("Filters");
-    const wrapper = filterComponent.querySelector(".wrapper");
-
-    expect(wrapper.childNodes.length).toEqual(3);
+    expect(screen.getByText(/category/i)).toBeInTheDocument();
+    expect(screen.getByText(/price range/i)).toBeInTheDocument();
+    expect(screen.getByText(/rating/i)).toBeInTheDocument();
   });
 
   it("Sort btn opens a dropdown when clicked", async () => {
     const user = userEvent.setup();
     const { getByText } = render(<ShopPage />);
 
-    await user.click(getByText(/sort/i)).then(() => {
-      expect(getByText(/featured/i)).toBeInTheDocument();
+    await user.click(getByText(/sort [(]featured[)]/i)).then(() => {
       expect(getByText(/high to low/i)).toBeInTheDocument();
       expect(getByText(/low to high/i)).toBeInTheDocument();
     });

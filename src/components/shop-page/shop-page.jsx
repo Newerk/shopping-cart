@@ -22,7 +22,7 @@ SortDropDown.propTypes = {
   setDropDown: PropTypes.func,
 };
 
-export const ShopPage = () => {
+export const ShopPage = ({ database }) => {
   const [dropDown, setDropDown] = useState(null);
   const [activeSort, setActiveSort] = useState("Featured");
   const [activeView, setActiveView] = useState(25);
@@ -70,9 +70,22 @@ export const ShopPage = () => {
           data-testid="items-container"
           className={styles["items-container"]}
         >
-          <Card />
+          {database &&
+            database.map((card) => (
+              <div key={card.id}>
+                <Card
+                  img_src={card.img_src}
+                  item_name={card.item_name}
+                  item_price={card.item_price}
+                />
+              </div>
+            ))}
         </div>
       </section>
     </div>
   );
+};
+
+ShopPage.propTypes = {
+  database: PropTypes.arrayOf(PropTypes.object),
 };

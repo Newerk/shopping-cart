@@ -2,10 +2,10 @@ import styles from "../item-card/item-card.module.css";
 import PropTypes from "prop-types";
 
 export const Card = ({ img_src, item_name, item_price }) => {
-  //placeholder values
-  img_src = "";
-  item_name = "NAME OF ITEM";
-  item_price = 5000;
+//   //placeholder values
+//   img_src = "";
+//   item_name = "NAME OF ITEM";
+//   item_price = 5000;
 
   return (
     <div className={styles["card"]}>

@@ -63,6 +63,9 @@ button {
   width: 100%;
   background-color: burlywood;
   overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: row;
 }
 
 .dropdown {

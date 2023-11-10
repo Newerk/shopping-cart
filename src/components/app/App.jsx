@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { HomePage } from "../home-page/home-page.jsx";
 import { ShopPage } from "../shop-page/shop-page.jsx";
 import styles from "../app/App.module.css";
+import { mockDataBase } from "../../mock-database.js";
 
 const Header = () => {
   return (
@@ -27,7 +28,7 @@ export const App = () => {
   return (
     <>
       <Header />
-      {page === "shop" ? <ShopPage /> : <HomePage />}
+      {page === "shop" ? <ShopPage database={mockDataBase} /> : <HomePage />}
     </>
   );
 };

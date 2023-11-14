@@ -12,8 +12,44 @@ const SearchBar = () => {
   );
 };
 
-const SortDropDown = () => {
-  return <div className={styles["dropdown"]}></div>;
+const SortDropDown = ({ activeSort, setActiveSort }) => {
+  const handleBtnClick = (e) => {
+    switch (e.target.textContent) {
+      case "Featured":
+        setActiveSort(e.target.textContent);
+        break;
+
+      case "High to Low":
+        setActiveSort(e.target.textContent);
+
+        break;
+
+      case "Low to High":
+        setActiveSort(e.target.textContent);
+
+        break;
+    }
+  };
+  return (
+    <div className={styles["dropdown"]}>
+      {activeSort === "Featured" ? (
+        <>
+          <button onClick={handleBtnClick}>High to Low</button>
+          <button onClick={handleBtnClick}>Low to High</button>
+        </>
+      ) : activeSort === "High to Low" ? (
+        <>
+          <button onClick={handleBtnClick}>Featured</button>
+          <button onClick={handleBtnClick}>Low to High</button>
+        </>
+      ) : (
+        <>
+          <button onClick={handleBtnClick}>Featured</button>
+          <button onClick={handleBtnClick}>High to Low</button>
+        </>
+      )}
+    </div>
+  );
 };
 
 SortDropDown.propTypes = {
@@ -40,28 +76,34 @@ export const ShopPage = ({ database }) => {
           <li>Price Range</li>
           <li>Rating</li>
         </ul>
+        {/*Needs an 'apply' button*/}
       </aside>
       <header className={styles["shop-header"]}>
         <SearchBar />
         <div className={styles["btns-wrapper"]}>
-          <button
+          <div
             className={styles["sort-btn"]}
             onClick={() => {
-              setDropDown(<SortDropDown />);
+              setDropDown(
+                <SortDropDown
+                  activeSort={activeSort}
+                  setActiveSort={setActiveSort}
+                />
+              );
             }}
           >
             Sort {`(${activeSort})`}
             {dropDown}
-          </button>
+          </div>
 
-          <button
+          <div
             className={styles["view-btn"]}
             onClick={() => {
               setDropDown(<ViewDropDown />);
             }}
           >
             View {"(25)"}
-          </button>
+          </div>
         </div>
       </header>
       <section className={styles["items-wrapper"]}>

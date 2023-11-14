@@ -40,6 +40,7 @@
 }
 .btns-wrapper {
   place-self: center end;
+  display: flex;
 }
 
 button {
@@ -49,7 +50,17 @@ button {
 .sort-btn {
   text-align: start;
   width: 8rem;
+  height: 2rem;
+  background-color: azure;
 }
+
+.view-btn {
+    text-align: start;
+    width: 8rem;
+    height: 2rem;
+    background-color: azure;
+  }
+  
 
 .items-wrapper {
   display: grid;
@@ -64,8 +75,10 @@ button {
   background-color: burlywood;
   overflow-y: scroll;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   grid-auto-flow: row;
+  /* padding: 1rem; */
+  /* gap: 1rem; */
 }
 
 .dropdown {

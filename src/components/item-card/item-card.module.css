@@ -1,7 +1,40 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  width: 25rem;
-  height: 10rem;
-  background-color: brown;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  padding: 1rem;
+  margin: 1rem;
+
+  width: auto;
+  background-color: white;
+}
+.item-thumbnail {
+  height: 300px;
+  width: 100%;
+  grid-column: 1 /3;
+  grid-row: 1;
+}
+
+.item-name {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  height: 3rem;
+  font-size: 2rem;
+}
+
+.item-price {
+  grid-column: 1;
+  grid-row: 3;
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
+.add-cart-btn {
+  grid-column: 2;
+  grid-row: 3;
+  height: 3rem;
+  width: 10rem;
+  background-color: rgb(44, 125, 255);
+  color: white;
+  place-self: end;
 }

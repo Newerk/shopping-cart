@@ -4,6 +4,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 0",
     item_price: 100,
+    category: "electronics",
     featured_value: 3,
   },
   {
@@ -11,6 +12,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 1",
     item_price: 200,
+    category: "clothes",
     featured_value: 1,
   },
   {
@@ -18,6 +20,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 2",
     item_price: 300,
+    category: "furniture",
     featured_value: 6,
   },
   {
@@ -25,6 +28,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 3",
     item_price: 400,
+    category: "electronics",
     featured_value: 2,
   },
   {
@@ -32,6 +36,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 4",
     item_price: 500,
+    category: "toy",
     featured_value: 5,
   },
   {
@@ -39,6 +44,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 5",
     item_price: 600,
+    category: "clothes",
     featured_value: 8,
   },
   {
@@ -46,6 +52,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 6",
     item_price: 700,
+    category: "furniture",
     featured_value: 4,
   },
   {
@@ -53,6 +60,7 @@ export const mockDataBase = [
     img_src: "../src/mock-img.jpg",
     item_name: "Example Item 7",
     item_price: 800,
+    category: "jewelry",
     featured_value: 7,
-  }
+  },
 ];

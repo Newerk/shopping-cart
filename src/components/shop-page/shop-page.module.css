@@ -38,6 +38,7 @@
   height: 2rem;
   width: 40rem;
 }
+
 .btns-wrapper {
   place-self: center end;
   display: flex;
@@ -69,6 +70,10 @@ button {
   height: calc(100vh - 6rem);
 }
 
+section > h2 {
+    padding-left: 1rem;
+}
+
 .items-container {
   height: 100%;
   width: 100%;
@@ -77,8 +82,6 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   grid-auto-flow: row;
-  /* padding: 1rem; */
-  /* gap: 1rem; */
 }
 
 .dropdown {

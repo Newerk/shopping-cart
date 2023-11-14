@@ -84,12 +84,14 @@ export const ShopPage = ({ database }) => {
           <div
             className={styles["sort-btn"]}
             onClick={() => {
-              setDropDown(
-                <SortDropDown
-                  activeSort={activeSort}
-                  setActiveSort={setActiveSort}
-                />
-              );
+              dropDown === null
+                ? setDropDown(
+                    <SortDropDown
+                      activeSort={activeSort}
+                      setActiveSort={setActiveSort}
+                    />
+                  )
+                : setDropDown(null);
             }}
           >
             Sort {`(${activeSort})`}

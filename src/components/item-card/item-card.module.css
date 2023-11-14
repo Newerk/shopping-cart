@@ -23,6 +23,8 @@
 }
 
 .item-price {
+  display: flex;
+  align-items: center;
   grid-column: 1;
   grid-row: 3;
   height: 3rem;

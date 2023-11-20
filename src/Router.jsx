@@ -10,7 +10,7 @@ export const Router = () => {
       error: <ErrorPage />,
     },
     {
-      path: "/:page",
+      path: "/:page/:pageNum",
       element: <App />,
     },
   ]);

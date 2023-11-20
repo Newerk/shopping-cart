@@ -4,7 +4,7 @@ import styles from "../home-page/home-page.module.css";
 export const HomePage = ({ type = "primary" }) => {
   return (
     <section>
-      <Link to="shop">
+      <Link to="shop/1">
         <button className={styles[type]}>Shop Now</button>
       </Link>
     </section>

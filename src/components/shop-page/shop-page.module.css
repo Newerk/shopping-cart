@@ -56,14 +56,13 @@ button {
 }
 
 .view-btn {
-    text-align: start;
-    width: 8rem;
-    height: 2rem;
-    background-color: azure;
-  }
-  
+  text-align: start;
+  width: 8rem;
+  height: 2rem;
+  background-color: azure;
+}
 
-.items-wrapper {
+.items-section {
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
@@ -71,14 +70,19 @@ button {
 }
 
 section > h2 {
-    padding-left: 1rem;
+  padding-left: 1rem;
+}
+
+.items-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
 }
 
 .items-container {
-  height: 100%;
-  width: 100%;
   background-color: burlywood;
-  overflow-y: scroll;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   grid-auto-flow: row;

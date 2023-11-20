@@ -43,12 +43,10 @@ describe("Shop Page Component", () => {
     const getByTestId = render(<ShopPage />);
 
     await user.click(screen.getByText(/^[(]?25[)]?$/)).then(() => {
-      expect(getByTestId("items-container").childNodes.length).toBeGreaterThan(
-        0
-      );
+      expect(getByTestId("items-wrapper").childNodes.length).toBeGreaterThan(0);
 
       expect(
-        getByTestId("items-container").childNodes.length
+        getByTestId("items-wrapper").childNodes.length
       ).toBeLessThanOrEqual(25);
     });
   });
@@ -58,12 +56,12 @@ describe("Shop Page Component", () => {
     const getByTestId = render(<ShopPage />);
 
     await user.click(screen.getByText(/^[(]?50[)]?$/)).then(() => {
-      expect(getByTestId("items-container").childNodes.length).toBeGreaterThan(
+      expect(getByTestId("items-wrapper").childNodes.length).toBeGreaterThan(
         25
       );
 
       expect(
-        getByTestId("items-container").childNodes.length
+        getByTestId("items-wrapper").childNodes.length
       ).toBeLessThanOrEqual(50);
     });
   });
@@ -73,12 +71,12 @@ describe("Shop Page Component", () => {
     const getByTestId = render(<ShopPage />);
 
     await user.click(screen.getByText(/^[(]?100[)]?$/)).then(() => {
-      expect(getByTestId("items-container").childNodes.length).toBeGreaterThan(
+      expect(getByTestId("items-wrapper").childNodes.length).toBeGreaterThan(
         50
       );
 
       expect(
-        getByTestId("items-container").childNodes.length
+        getByTestId("items-wrapper").childNodes.length
       ).toBeLessThanOrEqual(100);
     });
   });

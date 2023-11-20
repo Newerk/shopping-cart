@@ -5,6 +5,10 @@ import { Card } from "../item-card/item-card";
 import { mergeSortLowToHigh } from "../../sorting/merge-sort-LH";
 import { mergeSortHighToLow } from "../../sorting/merge-sort-HL";
 import { mergeSortFeatured } from "../../sorting/merge-sort-featured";
+import { Link, Outlet } from "react-router-dom";
+
+//create an array of browser routers to handle which shop page loads into the <Outlet /> component *INCOMPLETE*
+/* See link: https://www.codeacademy.com/learn/learn-react-router/modules/learn-react-router/cheatsheet */
 
 const SearchBar = () => {
   return (
@@ -70,6 +74,40 @@ SortDropDown.propTypes = {
   sortArray: PropTypes.array,
 };
 
+const ViewDropDown = ({ activeView, setActiveView, database }) => {
+  return Math.ceil(database.length / activeView);
+};
+
+ViewDropDown.propTypes = {
+  activeView: PropTypes.number,
+  setActiveView: PropTypes.func,
+  database: PropTypes.arrayOf(PropTypes.object),
+};
+
+const PageNav = ({ database, activeView }) => {
+  const pagesArr = [];
+  const pages = Math.ceil(database.length / activeView);
+
+  for (let i = 1; i <= pages; i++) {
+    pagesArr.push(i);
+  }
+
+  return (
+    <nav>
+      {pagesArr.map((page) => (
+        <Link to={`${page}`} key={page}>
+          {page}
+        </Link>
+      ))}
+    </nav>
+  );
+};
+
+PageNav.propTypes = {
+  activeView: PropTypes.number,
+  database: PropTypes.arrayOf(PropTypes.object),
+};
+
 export const ShopPage = ({ database }) => {
   const [dropDown, setDropDown] = useState(null);
   const [activeSort, setActiveSort] = useState("Featured");
@@ -109,10 +147,6 @@ export const ShopPage = ({ database }) => {
       </div>
     ));
   }
-
-  const handleSortSelection = () => {};
-
-  const handleViewSelection = () => {};
 
   return (
     <div className={styles["shop"]}>
@@ -154,20 +188,28 @@ export const ShopPage = ({ database }) => {
           <div
             className={styles["view-btn"]}
             onClick={() => {
-              setDropDown(<ViewDropDown />);
+              setDropDown(
+                <ViewDropDown
+                  activeView={activeView}
+                  setActiveView={setActiveView}
+                  database={database}
+                />
+              );
             }}
           >
-            View {"(25)"}
+            View {`(${activeView})`}
           </div>
         </div>
       </header>
-      <section className={styles["items-wrapper"]}>
+      <section className={styles["items-section"]}>
         <h2>Products</h2>
-        <div
-          data-testid="items-container"
-          className={styles["items-container"]}
-        >
-          {sortedItems}
+        <div data-testid="items-wrapper" className={styles["items-wrapper"]}>
+          <div className={styles["items-container"]}>{sortedItems}</div>
+          {/* <Outlet /> */}
+          <div className={styles["shop-page-nav"]}>
+            {/* {"<- 1 2 3 4 (5) 6 7 8 ... 25 ->"} */}
+            <PageNav database={database} activeView={activeView} />
+          </div>
         </div>
       </section>
     </div>

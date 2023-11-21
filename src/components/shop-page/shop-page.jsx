@@ -24,8 +24,6 @@ const SearchBar = () => {
 const SortDropDown = ({
   activeSort,
   setActiveSort,
-  setSortedItems,
-  sortArray,
   setSortedDatabase,
   database,
 }) => {
@@ -33,21 +31,18 @@ const SortDropDown = ({
     switch (e.target.textContent) {
       case "Featured":
         setActiveSort(e.target.textContent);
-        setSortedItems(sortArray[0]);
         setSortedDatabase(mergeSortFeatured(database));
 
         break;
 
       case "High to Low":
         setActiveSort(e.target.textContent);
-        setSortedItems(sortArray[1]);
         setSortedDatabase(mergeSortHighToLow(database));
 
         break;
 
       case "Low to High":
         setActiveSort(e.target.textContent);
-        setSortedItems(sortArray[2]);
         setSortedDatabase(mergeSortLowToHigh(database));
 
         break;
@@ -78,8 +73,6 @@ const SortDropDown = ({
 SortDropDown.propTypes = {
   activeSort: PropTypes.string,
   setActiveSort: PropTypes.func,
-  setSortedItems: PropTypes.func,
-  sortArray: PropTypes.array,
   setSortedDatabase: PropTypes.func,
   database: PropTypes.array,
 };
@@ -127,45 +120,10 @@ export const ShopPage = ({ database }) => {
   const [dropDown, setDropDown] = useState(null);
   const [activeSort, setActiveSort] = useState("Featured");
   const [activeView, setActiveView] = useState(25);
-  const [sortedItems, setSortedItems] = useState(sortByFeatured);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortedDatabase, setSortedDatabase] = useState(
     mergeSortFeatured(database)
   );
-
-  function sortByFeatured() {
-    return mergeSortFeatured(database).map((card) => (
-      <div key={card.id}>
-        <Card
-          img_src={card.img_src}
-          item_name={card.item_name}
-          item_price={card.item_price}
-        />
-      </div>
-    ));
-  }
-  function sortByHighToLow() {
-    return mergeSortHighToLow(database).map((card) => (
-      <div key={card.id}>
-        <Card
-          img_src={card.img_src}
-          item_name={card.item_name}
-          item_price={card.item_price}
-        />
-      </div>
-    ));
-  }
-  function sortByLowToHigh() {
-    return mergeSortLowToHigh(database).map((card) => (
-      <div key={card.id}>
-        <Card
-          img_src={card.img_src}
-          item_name={card.item_name}
-          item_price={card.item_price}
-        />
-      </div>
-    ));
-  }
 
   return (
     <div className={styles["shop"]}>
@@ -189,12 +147,6 @@ export const ShopPage = ({ database }) => {
                     <SortDropDown
                       activeSort={activeSort}
                       setActiveSort={setActiveSort}
-                      setSortedItems={setSortedItems}
-                      sortArray={[
-                        sortByFeatured,
-                        sortByHighToLow,
-                        sortByLowToHigh,
-                      ]}
                       setSortedDatabase={setSortedDatabase}
                       database={database}
                     />

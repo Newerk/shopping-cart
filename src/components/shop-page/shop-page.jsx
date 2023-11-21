@@ -1,16 +1,11 @@
 import { useState } from "react";
 import styles from "../shop-page/shop-page.module.css";
 import PropTypes from "prop-types";
-import { Card } from "../item-card/item-card";
 import { mergeSortLowToHigh } from "../../sorting/merge-sort-LH";
 import { mergeSortHighToLow } from "../../sorting/merge-sort-HL";
 import { mergeSortFeatured } from "../../sorting/merge-sort-featured";
-import { Link, Outlet } from "react-router-dom";
-import arrayOfPages from "../../array-of-pages";
+import { Link } from "react-router-dom";
 import Pages from "../../array-of-pages";
-
-//create an array of browser routers to handle which shop page loads into the <Outlet /> component *INCOMPLETE*
-/* See link: https://www.codeacademy.com/learn/learn-react-router/modules/learn-react-router/cheatsheet */
 
 const SearchBar = () => {
   return (
@@ -184,12 +179,9 @@ export const ShopPage = ({ database }) => {
                 activeView={activeView}
                 currentPage={currentPage}
               />
-              /* sortedItems */
             }
           </div>
-          {/* <Outlet /> */}
           <div className={styles["shop-page-nav"]}>
-            {/* {"<- 1 2 3 4 (5) 6 7 8 ... 25 ->"} */}
             <PageNav
               database={database}
               activeView={activeView}

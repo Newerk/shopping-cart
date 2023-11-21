@@ -26,23 +26,29 @@ const SortDropDown = ({
   setActiveSort,
   setSortedItems,
   sortArray,
+  setSortedDatabase,
+  database,
 }) => {
   const handleBtnClick = (e) => {
     switch (e.target.textContent) {
       case "Featured":
         setActiveSort(e.target.textContent);
         setSortedItems(sortArray[0]);
+        setSortedDatabase(mergeSortFeatured(database));
+
         break;
 
       case "High to Low":
         setActiveSort(e.target.textContent);
         setSortedItems(sortArray[1]);
+        setSortedDatabase(mergeSortHighToLow(database));
 
         break;
 
       case "Low to High":
         setActiveSort(e.target.textContent);
         setSortedItems(sortArray[2]);
+        setSortedDatabase(mergeSortLowToHigh(database));
 
         break;
     }
@@ -74,6 +80,8 @@ SortDropDown.propTypes = {
   setActiveSort: PropTypes.func,
   setSortedItems: PropTypes.func,
   sortArray: PropTypes.array,
+  setSortedDatabase: PropTypes.func,
+  database: PropTypes.array,
 };
 
 const ViewDropDown = ({ activeView, setActiveView, database }) => {
@@ -112,7 +120,7 @@ const PageNav = ({ database, activeView, setCurrentPage }) => {
 PageNav.propTypes = {
   activeView: PropTypes.number,
   database: PropTypes.arrayOf(PropTypes.object),
-  setCurrentPage: PropTypes.number,
+  setCurrentPage: PropTypes.func,
 };
 
 export const ShopPage = ({ database }) => {
@@ -121,6 +129,9 @@ export const ShopPage = ({ database }) => {
   const [activeView, setActiveView] = useState(25);
   const [sortedItems, setSortedItems] = useState(sortByFeatured);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortedDatabase, setSortedDatabase] = useState(
+    mergeSortFeatured(database)
+  );
 
   function sortByFeatured() {
     return mergeSortFeatured(database).map((card) => (
@@ -184,6 +195,8 @@ export const ShopPage = ({ database }) => {
                         sortByHighToLow,
                         sortByLowToHigh,
                       ]}
+                      setSortedDatabase={setSortedDatabase}
+                      database={database}
                     />
                   )
                 : setDropDown(null);
@@ -215,14 +228,8 @@ export const ShopPage = ({ database }) => {
           <div className={styles["items-container"]}>
             {
               <Pages
-                activeSort={activeSort}
+                sortedDatabase={sortedDatabase}
                 activeView={activeView}
-                sortArray={[
-                  mergeSortFeatured(database),
-                  mergeSortHighToLow(database),
-                  mergeSortLowToHigh(database),
-                ]}
-                totalPages={Math.ceil(database.length / activeView)}
                 currentPage={currentPage}
               />
               /* sortedItems */
@@ -231,7 +238,11 @@ export const ShopPage = ({ database }) => {
           {/* <Outlet /> */}
           <div className={styles["shop-page-nav"]}>
             {/* {"<- 1 2 3 4 (5) 6 7 8 ... 25 ->"} */}
-            <PageNav database={database} activeView={activeView} />
+            <PageNav
+              database={database}
+              activeView={activeView}
+              setCurrentPage={setCurrentPage}
+            />
           </div>
         </div>
       </section>

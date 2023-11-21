@@ -6,6 +6,8 @@ import { mergeSortLowToHigh } from "../../sorting/merge-sort-LH";
 import { mergeSortHighToLow } from "../../sorting/merge-sort-HL";
 import { mergeSortFeatured } from "../../sorting/merge-sort-featured";
 import { Link, Outlet } from "react-router-dom";
+import arrayOfPages from "../../array-of-pages";
+import Pages from "../../array-of-pages";
 
 //create an array of browser routers to handle which shop page loads into the <Outlet /> component *INCOMPLETE*
 /* See link: https://www.codeacademy.com/learn/learn-react-router/modules/learn-react-router/cheatsheet */
@@ -84,7 +86,7 @@ ViewDropDown.propTypes = {
   database: PropTypes.arrayOf(PropTypes.object),
 };
 
-const PageNav = ({ database, activeView }) => {
+const PageNav = ({ database, activeView, setCurrentPage }) => {
   const pagesArr = [];
   const pages = Math.ceil(database.length / activeView);
 
@@ -95,7 +97,11 @@ const PageNav = ({ database, activeView }) => {
   return (
     <nav>
       {pagesArr.map((page) => (
-        <Link to={`${page}`} key={page}>
+        <Link
+          to={`/shop/${page}`}
+          key={page}
+          onClick={() => setCurrentPage(page)}
+        >
           {page}
         </Link>
       ))}
@@ -106,6 +112,7 @@ const PageNav = ({ database, activeView }) => {
 PageNav.propTypes = {
   activeView: PropTypes.number,
   database: PropTypes.arrayOf(PropTypes.object),
+  setCurrentPage: PropTypes.number,
 };
 
 export const ShopPage = ({ database }) => {
@@ -113,6 +120,7 @@ export const ShopPage = ({ database }) => {
   const [activeSort, setActiveSort] = useState("Featured");
   const [activeView, setActiveView] = useState(25);
   const [sortedItems, setSortedItems] = useState(sortByFeatured);
+  const [currentPage, setCurrentPage] = useState(1);
 
   function sortByFeatured() {
     return mergeSortFeatured(database).map((card) => (
@@ -204,7 +212,22 @@ export const ShopPage = ({ database }) => {
       <section className={styles["items-section"]}>
         <h2>Products</h2>
         <div data-testid="items-wrapper" className={styles["items-wrapper"]}>
-          <div className={styles["items-container"]}>{sortedItems}</div>
+          <div className={styles["items-container"]}>
+            {
+              <Pages
+                activeSort={activeSort}
+                activeView={activeView}
+                sortArray={[
+                  mergeSortFeatured(database),
+                  mergeSortHighToLow(database),
+                  mergeSortLowToHigh(database),
+                ]}
+                totalPages={Math.ceil(database.length / activeView)}
+                currentPage={currentPage}
+              />
+              /* sortedItems */
+            }
+          </div>
           {/* <Outlet /> */}
           <div className={styles["shop-page-nav"]}>
             {/* {"<- 1 2 3 4 (5) 6 7 8 ... 25 ->"} */}

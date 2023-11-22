@@ -72,8 +72,46 @@ SortDropDown.propTypes = {
   database: PropTypes.array,
 };
 
-const ViewDropDown = ({ activeView, setActiveView, database }) => {
-  return Math.ceil(database.length / activeView);
+const ViewDropDown = ({ activeView, setActiveView }) => {
+  const handleBtnClick = (e) => {
+    switch (e.target.textContent) {
+      case "25":
+        setActiveView(parseInt(e.target.textContent));
+
+        break;
+
+      case "50":
+        setActiveView(parseInt(e.target.textContent));
+
+        break;
+
+      case "100":
+        setActiveView(parseInt(e.target.textContent));
+
+        break;
+    }
+  };
+
+  return (
+    <div className={styles["dropdown"]}>
+      {activeView === 25 ? (
+        <>
+          <button onClick={handleBtnClick}>50</button>
+          <button onClick={handleBtnClick}>100</button>
+        </>
+      ) : activeView === 50 ? (
+        <>
+          <button onClick={handleBtnClick}>25</button>
+          <button onClick={handleBtnClick}>100</button>
+        </>
+      ) : (
+        <>
+          <button onClick={handleBtnClick}>25</button>
+          <button onClick={handleBtnClick}>50</button>
+        </>
+      )}
+    </div>
+  );
 };
 
 ViewDropDown.propTypes = {

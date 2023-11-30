@@ -149,7 +149,7 @@ PageNav.propTypes = {
   setCurrentPage: PropTypes.func,
 };
 
-export const ShopPage = ({ database }) => {
+export const ShopPage = ({ database, setCartSize }) => {
   const [dropDown, setDropDown] = useState(null);
   const [activeSort, setActiveSort] = useState("Featured");
   const [activeView, setActiveView] = useState(25);
@@ -192,7 +192,7 @@ export const ShopPage = ({ database }) => {
           </div>
 
           <div
-            className={styles["view-btn" ]}
+            className={styles["view-btn"]}
             onClick={() => {
               setDropDown(
                 <ViewDropDown
@@ -216,6 +216,7 @@ export const ShopPage = ({ database }) => {
                 sortedDatabase={sortedDatabase}
                 activeView={activeView}
                 currentPage={currentPage}
+                setCartSize={setCartSize}
               />
             }
           </div>

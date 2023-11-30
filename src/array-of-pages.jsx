@@ -1,6 +1,6 @@
 import { Card } from "./components/item-card/item-card";
 
-export default function Pages({ sortedDatabase, activeView, currentPage }) {
+export default function Pages({ sortedDatabase, activeView, currentPage, setCartSize }) {
   let segmentedArr = [];
   let pageArr = [];
 
@@ -18,6 +18,8 @@ export default function Pages({ sortedDatabase, activeView, currentPage }) {
         img_src={card.img_src}
         item_name={card.item_name}
         item_price={card.item_price}
+        self_ref={card}
+        setCartSize={setCartSize}
       />
     </div>
   ));

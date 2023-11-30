@@ -192,7 +192,7 @@ export const ShopPage = ({ database }) => {
           </div>
 
           <div
-            className={styles["view-btn"]}
+            className={styles["view-btn" ]}
             onClick={() => {
               setDropDown(
                 <ViewDropDown

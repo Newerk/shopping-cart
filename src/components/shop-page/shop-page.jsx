@@ -72,45 +72,47 @@ SortDropDown.propTypes = {
   database: PropTypes.array,
 };
 
-const ViewDropDown = ({ activeView, setActiveView }) => {
+const ViewDropDown = ({ activeView, setActiveView, setCurrentPage }) => {
   const handleBtnClick = (e) => {
     switch (e.target.textContent) {
       case "25":
         setActiveView(parseInt(e.target.textContent));
-
+        setCurrentPage(1);
         break;
 
       case "50":
         setActiveView(parseInt(e.target.textContent));
-
+        setCurrentPage(1);
         break;
 
       case "100":
         setActiveView(parseInt(e.target.textContent));
-
+        setCurrentPage(1);
         break;
     }
   };
 
   return (
-    <div className={styles["dropdown"]}>
-      {activeView === 25 ? (
-        <>
-          <button onClick={handleBtnClick}>50</button>
-          <button onClick={handleBtnClick}>100</button>
-        </>
-      ) : activeView === 50 ? (
-        <>
-          <button onClick={handleBtnClick}>25</button>
-          <button onClick={handleBtnClick}>100</button>
-        </>
-      ) : (
-        <>
-          <button onClick={handleBtnClick}>25</button>
-          <button onClick={handleBtnClick}>50</button>
-        </>
-      )}
-    </div>
+    <Link to="/shop/1">
+      <div className={styles["dropdown"]}>
+        {activeView === 25 ? (
+          <>
+            <button onClick={handleBtnClick}>50</button>
+            <button onClick={handleBtnClick}>100</button>
+          </>
+        ) : activeView === 50 ? (
+          <>
+            <button onClick={handleBtnClick}>25</button>
+            <button onClick={handleBtnClick}>100</button>
+          </>
+        ) : (
+          <>
+            <button onClick={handleBtnClick}>25</button>
+            <button onClick={handleBtnClick}>50</button>
+          </>
+        )}
+      </div>
+    </Link>
   );
 };
 
@@ -199,6 +201,7 @@ export const ShopPage = ({ database, setCartSize }) => {
                   activeView={activeView}
                   setActiveView={setActiveView}
                   database={database}
+                  setCurrentPage={setCurrentPage}
                 />
               );
             }}

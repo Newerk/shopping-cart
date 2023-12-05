@@ -120,6 +120,7 @@ ViewDropDown.propTypes = {
   activeView: PropTypes.number,
   setActiveView: PropTypes.func,
   database: PropTypes.arrayOf(PropTypes.object),
+  setCurrentPage: PropTypes.func,
 };
 
 const PageNav = ({ database, activeView, setCurrentPage }) => {
@@ -213,7 +214,10 @@ export const ShopPage = ({ database, setCartSize }) => {
       <section className={styles["items-section"]}>
         <h2>Products</h2>
         <div data-testid="items-wrapper" className={styles["items-wrapper"]}>
-          <div className={styles["items-container"]}>
+          <div
+            data-testid="items-container"
+            className={styles["items-container"]}
+          >
             {
               <Pages
                 sortedDatabase={sortedDatabase}
@@ -238,4 +242,5 @@ export const ShopPage = ({ database, setCartSize }) => {
 
 ShopPage.propTypes = {
   database: PropTypes.arrayOf(PropTypes.object),
+  setCartSize: PropTypes.func,
 };

@@ -9,11 +9,6 @@ export const Card = ({
   self_ref,
   setCartSize,
 }) => {
-  //   //placeholder values
-  //   img_src = "";
-  //   item_name = "NAME OF ITEM";
-  //   item_price = 5000;
-
   return (
     <div className={styles["card"]}>
       <img

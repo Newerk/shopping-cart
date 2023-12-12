@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
+import { ShoppingCart } from "./cart";
+
 
 // const mockIncrement = vi
 //   .fn()
@@ -20,25 +22,25 @@ import { describe, it, expect, vi } from "vitest";
 
 describe("Shopping Cart Component", () => {
   it("Cart Component Renders", () => {
-    expect(render(<ShoppingCart />)).toBeInTheDocument();
+    expect(render(<ShoppingCart items={notEmpty}/>)).toBeInTheDocument();
     expect(render(screen.getByText(/total price/i))).toBeInTheDocument();
     expect(render(screen.getByText(/summary/i))).toBeInTheDocument();
     expect(render(screen.getByText(/checkout/i))).toBeInTheDocument();
   });
 
   it("When Cart is not empty, selected item is rendered", () => {
-    render(<ShoppingCart items={notEmpty} />); //placeholder prop
+    render(<ShoppingCart items={[notEmpty]} />); //placeholder prop
     expect(screen.getAllByTestId("items-wrapper")).toBeInTheDocument();
   });
 
   it("When Cart is empty shopping cart is blank", () => {
-    render(<ShoppingCart items={empty} />); //placeholder prop
+    render(<ShoppingCart items={[]} />); //empty prop
     expect(screen.getAllByTestId("items-wrapper")).not.toBeInTheDocument();
   });
 
   it("Pressing '+' or '-' button changes quantity of item", async () => {
     const user = userEvent.setup();
-    render(<ShoppingCart items={notEmpty} />); //placeholder prop
+    render(<ShoppingCart items={[]} />); //empty cart
     const itemsWrapper = screen.getByTestId("items-wrapper");
 
     let currentQuantity =

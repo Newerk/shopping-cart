@@ -5,6 +5,7 @@ import styles from "../app/App.module.css";
 import { mockDataBase } from "../../mock-database.js";
 import { cartItems } from "../cart/cart-database.js";
 import { useState } from "react";
+import { ShoppingCart } from "../cart/cart.jsx";
 
 const Header = ({ cartSize }) => {
   return (
@@ -17,9 +18,9 @@ const Header = ({ cartSize }) => {
           <Link to="/shop/1">Shop</Link>
         </li>
         <li>
-          <a href="/cart">
+          <Link to="/cart">
             Cart{cartSize === 0 ? "" : `(${cartItems.length})`}
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
@@ -33,7 +34,13 @@ export const App = () => {
   return (
     <>
       <Header cartSize={cartSize} />
-      {page === "shop" ? <ShopPage database={mockDataBase} setCartSize={setCartSize} /> : <HomePage />}
+      {page === "shop" ? (
+        <ShopPage database={mockDataBase} setCartSize={setCartSize} />
+      ) : page === "cart" ? (
+        <ShoppingCart items={[]} />
+      ) : (
+        <HomePage />
+      )}
     </>
   );
 };

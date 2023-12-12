@@ -1,0 +1,22 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 0.4fr;
+  grid-template-rows: 1fr;
+  height: calc(100vh - 3rem);
+  width: 100%;
+}
+
+.leftHalf {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  background-color: cadetblue;
+  height: 100%;
+  width: 100%;
+}
+
+.rightHalf {
+  background-color: forestgreen;
+  height: 100%;
+  width: 100%;
+}

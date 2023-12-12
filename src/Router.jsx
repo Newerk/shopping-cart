@@ -13,6 +13,10 @@ export const Router = () => {
       path: "/:page/:pageNum",
       element: <App />,
     },
+    {
+      path: "/:page",
+      element: <App />,
+    },
   ]);
 
   return <RouterProvider router={router} />;

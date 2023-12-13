@@ -20,7 +20,7 @@ const Header = ({ cartSize }) => {
         </li>
         <li>
           <Link to="/cart">
-            Cart{cartSize === 0 ? "" : `(${cartItems.length})`}
+            Cart{cartSize === 0 ? "" : `(${cartSize})`}
           </Link>
         </li>
       </ul>

@@ -24,10 +24,20 @@ export const Card = ({
       </div>
       <button
         onClick={() => {
-          self_ref.quantity += 1;
-          cartItems.push(self_ref);
-          setCartSize(cartItems.length);
-          console.log(cartItems);
+          if (
+            !!cartItems.find(
+              (item) => item.item_name === self_ref.item_name
+            ) === false
+          ) {
+            self_ref.quantity += 1;
+            cartItems.push(self_ref);
+          } else {
+            self_ref.quantity += 1;
+          }
+
+          setCartSize(
+            cartItems.reduce((total, obj) => total + obj.quantity, 0)
+          );
         }}
         className={styles["add-cart-btn"]}
       >

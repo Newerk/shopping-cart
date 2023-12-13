@@ -6,6 +6,7 @@ import { mockDataBase } from "../../mock-database.js";
 import { cartItems } from "../cart/cart-database.js";
 import { useState } from "react";
 import { ShoppingCart } from "../cart/cart.jsx";
+import PropType from "prop-types";
 
 const Header = ({ cartSize }) => {
   return (
@@ -37,10 +38,14 @@ export const App = () => {
       {page === "shop" ? (
         <ShopPage database={mockDataBase} setCartSize={setCartSize} />
       ) : page === "cart" ? (
-        <ShoppingCart items={[]} />
+        <ShoppingCart items={cartItems} />
       ) : (
         <HomePage />
       )}
     </>
   );
+};
+
+Header.propTypes = {
+  cartSize: PropType.number,
 };

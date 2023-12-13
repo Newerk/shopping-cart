@@ -24,6 +24,7 @@ export const Card = ({
       </div>
       <button
         onClick={() => {
+          self_ref.quantity += 1;
           cartItems.push(self_ref);
           setCartSize(cartItems.length);
           console.log(cartItems);
@@ -41,5 +42,5 @@ Card.propTypes = {
   item_name: PropTypes.string,
   item_price: PropTypes.number,
   self_ref: PropTypes.object,
-  setCartSize: PropTypes.func
+  setCartSize: PropTypes.func,
 };

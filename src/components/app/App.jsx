@@ -29,14 +29,19 @@ const Header = ({ cartSize }) => {
 export const App = () => {
   const { page } = useParams();
   const [cartSize, setCartSize] = useState(cartItems.length);
+  const [totalCost, setTotalCost] = useState(0);
 
   return (
     <>
       <Header cartSize={cartSize} />
       {page === "shop" ? (
-        <ShopPage database={mockDataBase} setCartSize={setCartSize} />
+        <ShopPage
+          database={mockDataBase}
+          setCartSize={setCartSize}
+          setTotalCost={setTotalCost}
+        />
       ) : page === "cart" ? (
-        <ShoppingCart items={cartItems} />
+        <ShoppingCart items={cartItems} totalCost={totalCost} />
       ) : (
         <HomePage />
       )}

@@ -152,7 +152,7 @@ PageNav.propTypes = {
   setCurrentPage: PropTypes.func,
 };
 
-export const ShopPage = ({ database, setCartSize }) => {
+export const ShopPage = ({ database, setCartSize, setTotalCost }) => {
   const [dropDown, setDropDown] = useState(null);
   const [activeSort, setActiveSort] = useState("Featured");
   const [activeView, setActiveView] = useState(25);
@@ -224,6 +224,7 @@ export const ShopPage = ({ database, setCartSize }) => {
                 activeView={activeView}
                 currentPage={currentPage}
                 setCartSize={setCartSize}
+                setTotalCost={setTotalCost}
               />
             }
           </div>

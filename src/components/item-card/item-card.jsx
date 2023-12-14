@@ -8,6 +8,7 @@ export const Card = ({
   item_price,
   self_ref,
   setCartSize,
+  setTotalCost,
 }) => {
   return (
     <div className={styles["card"]}>
@@ -38,6 +39,16 @@ export const Card = ({
           setCartSize(
             cartItems.reduce((total, obj) => total + obj.quantity, 0)
           );
+
+          let moreThanOne = cartItems
+            .filter((obj) => obj.quantity > 1)
+            .reduce((sum, obj) => sum + obj.item_price * obj.quantity, 0);
+
+          let onlyOne = cartItems
+            .filter((obj) => obj.quantity === 1)
+            .reduce((total, obj) => total + obj.item_price, 0);
+
+          setTotalCost(onlyOne + moreThanOne);
         }}
         className={styles["add-cart-btn"]}
       >
@@ -53,4 +64,5 @@ Card.propTypes = {
   item_price: PropTypes.number,
   self_ref: PropTypes.object,
   setCartSize: PropTypes.func,
+  setTotalCost: PropTypes.func,
 };

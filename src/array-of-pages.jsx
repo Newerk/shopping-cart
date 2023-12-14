@@ -5,6 +5,7 @@ export default function Pages({
   activeView,
   currentPage,
   setCartSize,
+  setTotalCost
 }) {
   let segmentedArr = [];
   let pageArr = [];
@@ -25,6 +26,7 @@ export default function Pages({
         item_price={card.item_price}
         self_ref={card}
         setCartSize={setCartSize}
+        setTotalCost={setTotalCost}
       />
     </div>
   ));

@@ -3,8 +3,7 @@ import styles from "../cart/cart.module.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export const ShoppingCart = ({ items }) => {
-  const [totalCost, setTotalCost] = useState(0);
+export const ShoppingCart = ({ items, totalCost }) => {
   return (
     <section className={styles.section}>
       <div className={styles.leftHalf}>
@@ -31,4 +30,5 @@ export const ShoppingCart = ({ items }) => {
 
 ShoppingCart.propTypes = {
   items: PropTypes.array,
+  totalCost: PropTypes.number,
 };

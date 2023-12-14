@@ -1,6 +1,11 @@
 import { Card } from "./components/item-card/item-card";
 
-export default function Pages({ sortedDatabase, activeView, currentPage, setCartSize }) {
+export default function Pages({
+  sortedDatabase,
+  activeView,
+  currentPage,
+  setCartSize,
+}) {
   let segmentedArr = [];
   let pageArr = [];
 

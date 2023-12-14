@@ -243,4 +243,5 @@ export const ShopPage = ({ database, setCartSize }) => {
 ShopPage.propTypes = {
   database: PropTypes.arrayOf(PropTypes.object),
   setCartSize: PropTypes.func,
+  setTotalCost: PropTypes.func,
 };

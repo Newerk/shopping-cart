@@ -19,9 +19,7 @@ const Header = ({ cartSize }) => {
           <Link to="/shop/1">Shop</Link>
         </li>
         <li>
-          <Link to="/cart">
-            Cart{cartSize === 0 ? "" : `(${cartSize})`}
-          </Link>
+          <Link to="/cart">Cart{cartSize === 0 ? "" : `(${cartSize})`}</Link>
         </li>
       </ul>
     </nav>

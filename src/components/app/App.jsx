@@ -3,7 +3,7 @@ import { HomePage } from "../home-page/home-page.jsx";
 import { ShopPage } from "../shop-page/shop-page.jsx";
 import styles from "../app/App.module.css";
 import { mockDataBase } from "../../mock-database.js";
-import { cartItems } from "../cart/cart-database.js";
+import { cartDatabase } from "../cart/cart-database.js";
 import { useState } from "react";
 import { ShoppingCart } from "../cart/cart.jsx";
 import PropType from "prop-types";
@@ -28,6 +28,7 @@ const Header = ({ cartSize }) => {
 
 export const App = () => {
   const { page } = useParams();
+  const [cartItems, setCartItems] = useState(cartDatabase)
   const [cartSize, setCartSize] = useState(cartItems.length);
   const [totalCost, setTotalCost] = useState(0);
 
@@ -41,7 +42,12 @@ export const App = () => {
           setTotalCost={setTotalCost}
         />
       ) : page === "cart" ? (
-        <ShoppingCart items={cartItems} totalCost={totalCost} />
+        <ShoppingCart
+          items={cartDatabase}
+          totalCost={totalCost}
+          setCartSize={setCartSize}
+          setTotalCost={setTotalCost}
+        />
       ) : (
         <HomePage />
       )}

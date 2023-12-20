@@ -1,4 +1,5 @@
-import { cartItems } from "../cart/cart-database";
+import { updateQuantities } from "../../modules/change-of-quantity";
+import { cartDatabase } from "../cart/cart-database";
 import styles from "../item-card/item-card.module.css";
 import PropTypes from "prop-types";
 
@@ -26,29 +27,21 @@ export const Card = ({
       <button
         onClick={() => {
           if (
-            !!cartItems.find(
+            !!cartDatabase.find(
               (item) => item.item_name === self_ref.item_name
             ) === false
           ) {
             self_ref.quantity += 1;
-            cartItems.push(self_ref);
+            cartDatabase.push(self_ref);
           } else {
             self_ref.quantity += 1;
           }
 
           setCartSize(
-            cartItems.reduce((total, obj) => total + obj.quantity, 0)
+            cartDatabase.reduce((total, obj) => total + obj.quantity, 0)
           );
 
-          let moreThanOne = cartItems
-            .filter((obj) => obj.quantity > 1)
-            .reduce((sum, obj) => sum + obj.item_price * obj.quantity, 0);
-
-          let onlyOne = cartItems
-            .filter((obj) => obj.quantity === 1)
-            .reduce((total, obj) => total + obj.item_price, 0);
-
-          setTotalCost(onlyOne + moreThanOne);
+          updateQuantities(setCartSize, setTotalCost, cartDatabase);
         }}
         className={styles["add-cart-btn"]}
       >

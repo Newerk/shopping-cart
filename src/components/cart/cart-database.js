@@ -1,1 +1,1 @@
-export let cartItems = [];
+export let cartDatabase = [];

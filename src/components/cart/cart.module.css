@@ -20,3 +20,35 @@
   height: 100%;
   width: 100%;
 }
+
+.card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  background-color: cornflowerblue;
+  margin: 1rem 1rem 0 1rem;
+  padding: 1rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto 1fr;
+}
+
+.thumbnail {
+  height: 15rem;
+  width: 20rem;
+}
+
+.itemName {
+  font-size: 2rem;
+}
+.itemPrice {
+  place-self: end;
+  font-size: 1.5rem;
+}
+
+.quantity {
+  grid-column: 2;
+  grid-row: 2;
+}

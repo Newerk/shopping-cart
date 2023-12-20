@@ -2,18 +2,48 @@ import PropTypes from "prop-types";
 import styles from "../cart/cart.module.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { cartDatabase } from "./cart-database";
+import { updateQuantities } from "../../modules/change-of-quantity";
 
-export const ShoppingCart = ({ items, totalCost }) => {
+export const ShoppingCart = ({
+  items,
+  totalCost,
+  setCartSize,
+  setTotalCost,
+}) => {
+  const handlePlusButton = (item) => {
+    item.quantity += 1;
+    updateQuantities(setCartSize, setTotalCost, items);
+  };
+
+  const handleMinusButton = (item) => {
+    item.quantity -= 1;
+    items.filter((obj) => obj.quantity < 0);
+
+    updateQuantities(setCartSize, setTotalCost, items);
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.leftHalf}>
-        {items.map((item) => (
-          <div key={uuidv4()}>
-            <h3>{item.item_name}</h3>
-            <h4>Price: ${item.item_price}</h4>
-            <p>Quantity: {item.quantity}</p>
-          </div>
-        ))}
+        {cartDatabase
+          .filter((obj) => obj.quantity > 0)
+          .map((item) => (
+            <div key={uuidv4()} className={styles.card}>
+              <img src={item.img_src} className={styles.thumbnail} />
+              <div className={styles.wrapper}>
+                <h3 className={styles.itemName}>{item.item_name}</h3>
+                <h4 className={styles.itemPrice}>${item.item_price}</h4>
+                <div className={styles.quantity}>
+                  Quantity
+                  <button onClick={() => handleMinusButton(item)}>-</button>
+                  {item.quantity}
+                  <button onClick={() => handlePlusButton(item)}>+</button>
+                </div>
+              </div>
+              1
+            </div>
+          ))}
       </div>
       <div className={styles.rightHalf}>
         <h2>Summary</h2>
@@ -31,4 +61,6 @@ export const ShoppingCart = ({ items, totalCost }) => {
 ShoppingCart.propTypes = {
   items: PropTypes.array,
   totalCost: PropTypes.number,
+  setCartSize: PropTypes.func,
+  setTotalCost: PropTypes.func,
 };

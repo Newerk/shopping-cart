@@ -153,7 +153,8 @@ PageNav.propTypes = {
 };
 
 export const ShopPage = ({ database, setCartSize, setTotalCost }) => {
-  const [dropDown, setDropDown] = useState(null);
+  const [sortDropDown, setSortDropDown] = useState(null);
+  const [viewDropDown, setViewDropDown] = useState(null);
   const [activeSort, setActiveSort] = useState("Featured");
   const [activeView, setActiveView] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
@@ -169,8 +170,8 @@ export const ShopPage = ({ database, setCartSize, setTotalCost }) => {
           <div
             className={styles["sort-btn"]}
             onClick={() => {
-              dropDown === null
-                ? setDropDown(
+              sortDropDown === null
+                ? setSortDropDown(
                     <SortDropDown
                       activeSort={activeSort}
                       setActiveSort={setActiveSort}
@@ -178,27 +179,30 @@ export const ShopPage = ({ database, setCartSize, setTotalCost }) => {
                       database={database}
                     />
                   )
-                : setDropDown(null);
+                : setSortDropDown(null);
             }}
           >
             Sort {`(${activeSort})`}
-            {dropDown}
+            {sortDropDown}
           </div>
 
           <div
             className={styles["view-btn"]}
             onClick={() => {
-              setDropDown(
-                <ViewDropDown
-                  activeView={activeView}
-                  setActiveView={setActiveView}
-                  database={database}
-                  setCurrentPage={setCurrentPage}
-                />
-              );
+              viewDropDown === null
+                ? setViewDropDown(
+                    <ViewDropDown
+                      activeView={activeView}
+                      setActiveView={setActiveView}
+                      setCurrentPage={setCurrentPage}
+                      database={database}
+                    />
+                  )
+                : setViewDropDown(null);
             }}
           >
             View {`(${activeView})`}
+            {viewDropDown}
           </div>
         </div>
       </header>

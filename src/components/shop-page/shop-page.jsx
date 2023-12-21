@@ -163,15 +163,6 @@ export const ShopPage = ({ database, setCartSize, setTotalCost }) => {
 
   return (
     <div className={styles["shop"]}>
-      <aside className={styles["filter-container"]}>
-        <h2>Filters</h2>
-        <ul>
-          <li>Category</li>
-          <li>Price Range</li>
-          <li>Rating</li>
-        </ul>
-        {/*Needs an 'apply' button*/}
-      </aside>
       <header className={styles["shop-header"]}>
         <SearchBar />
         <div className={styles["btns-wrapper"]}>

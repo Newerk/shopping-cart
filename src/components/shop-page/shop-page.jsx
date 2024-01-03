@@ -7,15 +7,6 @@ import { mergeSortFeatured } from "../../sorting/merge-sort-featured";
 import { Link } from "react-router-dom";
 import Pages from "../../array-of-pages";
 
-const SearchBar = () => {
-  return (
-    <div className={styles["searchbar"]}>
-      <div className={styles["bar"]}></div>
-      <button>Search</button>
-    </div>
-  );
-};
-
 const SortDropDown = ({
   activeSort,
   setActiveSort,
@@ -165,7 +156,6 @@ export const ShopPage = ({ database, setCartSize, setTotalCost }) => {
   return (
     <div className={styles["shop"]}>
       <header className={styles["shop-header"]}>
-        <SearchBar />
         <div className={styles["btns-wrapper"]}>
           <div
             className={styles["sort-btn"]}

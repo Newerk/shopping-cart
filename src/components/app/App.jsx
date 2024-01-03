@@ -28,7 +28,7 @@ const Header = ({ cartSize }) => {
 
 export const App = () => {
   const { page } = useParams();
-  const [cartItems, setCartItems] = useState(cartDatabase)
+  const [cartItems, set`CartItems`] = useState(cartDatabase)
   const [cartSize, setCartSize] = useState(cartItems.length);
   const [totalCost, setTotalCost] = useState(0);
 

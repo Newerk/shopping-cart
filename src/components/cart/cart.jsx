@@ -41,7 +41,6 @@ export const ShoppingCart = ({
                   <button onClick={() => handlePlusButton(item)}>+</button>
                 </div>
               </div>
-              1
             </div>
           ))}
       </div>

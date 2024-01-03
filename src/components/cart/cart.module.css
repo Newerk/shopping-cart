@@ -41,6 +41,8 @@
 }
 
 .itemName {
+  padding-left: 1rem;
+
   font-size: 2rem;
 }
 .itemPrice {
@@ -52,3 +54,66 @@
   grid-column: 2;
   grid-row: 2;
 }
+
+@media (max-width: 1200px) {
+  .card {
+    background-color: white;
+    grid-template-columns: auto 1fr;
+    height: fit-content;
+  }
+
+  /* .itemName,
+  .itemPrice,
+  .quantity {
+    grid-column: 2;
+  } */
+
+  .thumbnail {
+    grid-column: 1;
+    grid-row: 1 / 2;
+    /* width: 100%; */
+    /* height: 100%; */
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: repeat(2, auto) 1fr;
+  }
+
+  .itemName {
+    grid-column: 2;
+
+    grid-row: 1;
+  }
+  .itemPrice {
+    grid-column: 3;
+
+    grid-row: 1;
+  }
+  .quantity {
+    grid-column: 3;
+
+    grid-row: 2;
+    place-self: end;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rightHalf {
+    height: 10rem;
+  }
+
+  .leftHalf {
+    padding-bottom: 1rem;
+  }
+}
+
+/* @media (max-width: 535px) {
+  .card {
+    background-color: yellow;
+  }
+} */

@@ -123,7 +123,7 @@ const PageNav = ({ database, activeView, setCurrentPage }) => {
   }
 
   return (
-    <nav>
+    <nav className={styles["shopNav"]}>
       {pagesArr.map((page) => (
         <Link
           to={`/shop/${page}`}

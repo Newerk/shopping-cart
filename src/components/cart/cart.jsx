@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import styles from "../cart/cart.module.css";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { cartDatabase } from "./cart-database";
 import { updateQuantities } from "../../modules/change-of-quantity";

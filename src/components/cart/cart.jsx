@@ -45,9 +45,9 @@ export const ShoppingCart = ({
           ))}
       </div>
       <div className={styles.rightHalf}>
-        <h2>Summary</h2>
+        <h2 className={styles.rhSummary}>Summary</h2>
         <>
-          <h2>
+          <h2 className={styles.rhTotal}>
             Total: $<span>{totalCost}</span>
           </h2>
         </>

@@ -1,4 +1,6 @@
 import { Card } from "./components/item-card/item-card";
+import testImg from './mockimg.jpg'
+
 
 export default function Pages({
   sortedDatabase,
@@ -21,7 +23,7 @@ export default function Pages({
   return segmentedArr[currentPage - 1].map((card) => (
     <div key={card.id}>
       <Card
-        img_src={card.img_src}
+        img_src={testImg}
         item_name={card.item_name}
         item_price={card.item_price}
         self_ref={card}

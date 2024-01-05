@@ -2,9 +2,10 @@ import { updateQuantities } from "../../modules/change-of-quantity";
 import { cartDatabase } from "../cart/cart-database";
 import styles from "../item-card/item-card.module.css";
 import PropTypes from "prop-types";
+import testImg from '../../mockimg.jpg'
 
 export const Card = ({
-  img_src,
+  // img_src,
   item_name,
   item_price,
   self_ref,
@@ -15,7 +16,7 @@ export const Card = ({
     <div className={styles["card"]}>
       <img
         alt="item_thumbnail"
-        src={img_src}
+        src={testImg}
         className={styles["item-thumbnail"]}
       />
       <div data-testid="item_name" className={styles["item-name"]}>
@@ -52,7 +53,7 @@ export const Card = ({
 };
 
 Card.propTypes = {
-  img_src: PropTypes.string,
+  // img_src: PropTypes.string,
   item_name: PropTypes.string,
   item_price: PropTypes.number,
   self_ref: PropTypes.object,

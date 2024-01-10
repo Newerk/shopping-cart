@@ -1,5 +1,5 @@
 import { Card } from "./components/item-card/item-card";
-import testImg from './mockimg.jpg'
+import mockImg from './mockimg.jpg'
 
 
 export default function Pages({
@@ -23,7 +23,7 @@ export default function Pages({
   return segmentedArr[currentPage - 1].map((card) => (
     <div key={card.id}>
       <Card
-        img_src={testImg}
+        img_src={mockImg}
         item_name={card.item_name}
         item_price={card.item_price}
         self_ref={card}

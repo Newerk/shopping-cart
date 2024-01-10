@@ -2,7 +2,7 @@ import { updateQuantities } from "../../modules/change-of-quantity";
 import { cartDatabase } from "../cart/cart-database";
 import styles from "../item-card/item-card.module.css";
 import PropTypes from "prop-types";
-import testImg from '../../mockimg.jpg'
+import mockImg from '../../mockimg.jpg'
 
 export const Card = ({
   // img_src,
@@ -16,7 +16,7 @@ export const Card = ({
     <div className={styles["card"]}>
       <img
         alt="item_thumbnail"
-        src={testImg}
+        src={mockImg}
         className={styles["item-thumbnail"]}
       />
       <div data-testid="item_name" className={styles["item-name"]}>

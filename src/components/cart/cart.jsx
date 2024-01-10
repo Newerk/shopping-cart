@@ -3,7 +3,7 @@ import styles from "../cart/cart.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { cartDatabase } from "./cart-database";
 import { updateQuantities } from "../../modules/change-of-quantity";
-import testImg from '../../mockimg.jpg'
+import mockImg from '../../mockimg.jpg'
 
 
 export const ShoppingCart = ({
@@ -31,7 +31,7 @@ export const ShoppingCart = ({
           .filter((obj) => obj.quantity > 0)
           .map((item) => (
             <div key={uuidv4()} className={styles.card}>
-              <img src={testImg} className={styles.thumbnail} />
+              <img src={mockImg} className={styles.thumbnail} />
               <div className={styles.wrapper}>
                 <h3 className={styles.itemName}>{item.item_name}</h3>
                 <h4 className={styles.itemPrice}>${item.item_price}</h4>
